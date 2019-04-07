@@ -1,0 +1,64 @@
+﻿@model IEnumerable<Vehicles>
+
+@{
+    Layout = "_Layout";
+    var title = "Vehicle Management System";
+    ViewData["Title"] = title;
+}
+<h3><a asp-action="Create" class="btn btn-sm btn-secondary">Create</a></h3>
+
+<table class="table table-bordered table-sm table-striped">
+    <thead>
+        <tr><th>Vehicle</th><th>Make</th><th>Model</th><th>Engine</th><th>Doors</th><th>Wheels</th><th>BodyType</th><th>Colour</th><th>Update</th><th>Delete</th></tr>
+    </thead>
+    <tbody>
+        @if (Model == null)
+        {
+            <tr><td colspan="7" class="text-center">No Model Data</td></tr>
+        }
+        else
+        {
+            @foreach (var p in Model)
+            {
+                <tr>
+                    <td>@p.Type</td>
+                    <td>@p.Make</td>
+                    <td>@p.Model</td>
+
+                    @if (@p.Car != null)
+                    {
+                        foreach (var c in p.Car)
+                        {
+                            if (c.VPM == 2)
+                            {
+                                <td>@c.Value</td>
+                            }
+                            if (c.VPM == 3)
+                            {
+                                <td>@c.Value</td>
+                            }
+                            if (c.VPM == 4)
+                            {
+                                <td>@c.Value</td>
+                            }
+                            if (c.VPM == 5)
+                            {
+                                <td>@c.Value</td>
+                            }
+                            if (c.VPM == 6)
+                            {
+                                <td>@c.Value</td>
+                            }
+                        }
+                    }
+                    <td><a asp-action="Update" asp-route-id="@p.VRId">Update</a></td>
+                    <td>
+                        <form asp-action="Delete" method="post" asp-route-id="@p.VRId">
+                            <button>Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
