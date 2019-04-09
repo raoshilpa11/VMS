@@ -18,7 +18,7 @@ namespace VMS.Models
         public virtual DbSet<Vehicles> Vehicles { get; set; }
         public virtual DbSet<Car> Car { get; set; }
         public virtual DbSet<Cars> Cars { get; set; }
-        public virtual DbSet<VehiclePropertiesModel> VehiclePropertiesModel { get; set; }
+        //public virtual DbSet<VehiclePropertiesModel> VehiclePropertiesModel { get; set; }
         public virtual DbSet<Vehicle> Vehicle { get; set; }
         public virtual DbSet<VehicleMake> VehicleMake { get; set; }
         public virtual DbSet<VehicleMakemodelMapping> VehicleMakemodelMapping { get; set; }
@@ -117,32 +117,32 @@ namespace VMS.Models
                     .HasMaxLength(200);
             });
 
-            modelBuilder.Entity<VehiclePropertiesModel>(entity =>
-            {
-                entity.ToTable("VehiclePropertiesModel");
+            //modelBuilder.Entity<VehiclePropertiesModel>(entity =>
+            //{
+            //    entity.ToTable("VehiclePropertiesModel");
 
-                entity.Property(e => e.VpmId)
-                    .HasColumnName("VpmId")
-                    .HasColumnType("numeric(18, 0)");
+            //    entity.Property(e => e.VpmId)
+            //        .HasColumnName("VpmId")
+            //        .HasColumnType("numeric(18, 0)");
 
-                entity.Property(e => e.VtId)
-                    .HasColumnName("VtId")
-                    .HasColumnType("numeric(18, 0)");
-
-
-                entity.Property(e => e.VpId)
-                    .HasColumnName("VpId")
-                    .HasColumnType("numeric(18, 0)");
+            //    entity.Property(e => e.VtId)
+            //        .HasColumnName("VtId")
+            //        .HasColumnType("numeric(18, 0)");
 
 
-                entity.Property(e => e.PropertyName)
-                    .HasColumnName("PropertyName")
-                    .HasMaxLength(200);
+            //    entity.Property(e => e.VpId)
+            //        .HasColumnName("VpId")
+            //        .HasColumnType("numeric(18, 0)");
 
-                entity.Property(e => e.PropertyValue)
-                    .HasColumnName("PropertyValue")
-                    .HasMaxLength(200);
-            });
+
+            //    entity.Property(e => e.PropertyName)
+            //        .HasColumnName("PropertyName")
+            //        .HasMaxLength(200);
+
+            //    entity.Property(e => e.PropertyValue)
+            //        .HasColumnName("PropertyValue")
+            //        .HasMaxLength(200);
+            //});
 
             modelBuilder.Entity<VehicleMake>(entity =>
             {
