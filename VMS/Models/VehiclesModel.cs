@@ -28,8 +28,12 @@ namespace VMS.Models
         [NotMapped]
         public string Engine { get; set; }
         [NotMapped]
+        [Range(0, 4, ErrorMessage = "Can only be between 0 .. 4")]
+        [StringLength(1, ErrorMessage = "Max 1 digit")]
         public string Wheels { get; set; }
         [NotMapped]
+        [Range(0, 6, ErrorMessage = "Can only be between 0 .. 6")]
+        [StringLength(1, ErrorMessage = "Max 1 digit")]
         public string Doors { get; set; }
         [NotMapped]
         public string BodyType { get; set; }

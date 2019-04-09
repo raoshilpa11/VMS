@@ -13415,11 +13415,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Shilpa\\CoreAngular_sample\\CRUD-Operations-in-ADO.NET-with-ASP.NET-Core-master\\VMS\\VMS.csproj",
+      "projectUniqueName": "D:\\Shilpa\\CoreAngular_sample\\VMS\\VMS\\VMS.csproj",
       "projectName": "VMS",
-      "projectPath": "D:\\Shilpa\\CoreAngular_sample\\CRUD-Operations-in-ADO.NET-with-ASP.NET-Core-master\\VMS\\VMS.csproj",
+      "projectPath": "D:\\Shilpa\\CoreAngular_sample\\VMS\\VMS\\VMS.csproj",
       "packagesPath": "C:\\Users\\PC101\\.nuget\\packages\\",
-      "outputPath": "D:\\Shilpa\\CoreAngular_sample\\CRUD-Operations-in-ADO.NET-with-ASP.NET-Core-master\\VMS\\obj\\",
+      "outputPath": "D:\\Shilpa\\CoreAngular_sample\\VMS\\VMS\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

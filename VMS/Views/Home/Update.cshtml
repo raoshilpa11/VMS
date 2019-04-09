@@ -1,52 +1,93 @@
-﻿@model Teacher
-
+﻿@model VehiclesModel
 @{
     Layout = "_Layout";
-    var title = "UPDATE Teacher";
+    var title = "UPDATE Vehicle";
     ViewData["Title"] = title;
 }
-
 <style>
+
     .input-validation-error {
         border-color: red;
     }
 </style>
-
 <h2>@title</h2>
-
-<div asp-validation-summary="ModelOnly" class="text-danger"></div>
-<form class="m-1 p-1" method="post">
+<form asp-controller="Home" asp-action="Update" method="post" class="form-horizontal" role="form">
     <div class="form-group">
-        <label asp-for="Id"></label>
-        <input asp-for="Id" type="text" readonly class="form-control" />
+        <div class="row">
+            <div class="alert-danger" asp-validation-summary="ModelOnly">
+            </div>
+            <div class="col-xs-12 col-xm-12 col-md-6 col-lg-4">
+                <label class="control-label">Vehicle Type</label>
+                <select asp-for="VtId" class="form-control" asp-items="@(new SelectList(@ViewBag.ListOfVehicles,"VtId", "VehicletypeName"))"></select>
+            </div>
+        </div>
     </div>
     <div class="form-group">
-        <label asp-for="Name"></label>
-        <input asp-for="Name" type="text" class="form-control" />
-        <span asp-validation-for="Name" class="text-danger"></span>
+        <div class="row">
+            <div class="col-xs-12 col-xm-12 col-md-6 col-lg-4">
+                <label class="control-label">Make</label>
+                <select asp-for="VmakeId" class="form-control" id="VmakeId" asp-items="@(new SelectList(string.Empty,"VmakeId", "VehiclemakeName"))"></select>
+            </div>
+        </div>
     </div>
     <div class="form-group">
-        <label asp-for="Skills"></label>
-        <input asp-for="Skills" type="text" class="form-control" />
-        <span asp-validation-for="Skills" class="text-danger"></span>
+        <div class="row">
+            <div class="col-xs-12 col-xm-12 col-md-6 col-lg-4">
+                <label class="control-label">Model</label>
+                <select asp-for="VmodelId" class="form-control" id="VmodelId" asp-items="@(new SelectList(string.Empty,"VmodelId", "VehiclemodelName"))"></select>
+            </div>
+        </div>
     </div>
     <div class="form-group">
-        <label asp-for="TotalStudents"></label>
-        <input asp-for="TotalStudents" type="text" class="form-control" />
-        <span asp-validation-for="TotalStudents" class="text-danger"></span>
+        <div class="row">
+            <div class="col-xs-12 col-xm-12 col-md-6 col-lg-4">
+                <label asp-for="Engine"></label>
+                <input asp-for="Engine" type="text" class="form-control" />
+                <span asp-validation-for="Engine" class="text-danger"></span>
+            </div>
+        </div>
     </div>
     <div class="form-group">
-        <label asp-for="Salary"></label>
-        <input asp-for="Salary" type="text" class="form-control"/>
-        <span asp-validation-for="Salary" class="text-danger"></span>
+        <div class="row">
+            <div class="col-xs-12 col-xm-12 col-md-6 col-lg-4">
+                <label asp-for="Wheels"></label>
+                <input asp-for="Wheels" type="text" class="form-control" />
+                <span asp-validation-for="Wheels" class="text-danger"></span>
+            </div>
+        </div>
     </div>
     <div class="form-group">
-        <label asp-for="AddedOn"></label>
-        <input asp-for="AddedOn" type="text" class="form-control" asp-format="{0:d}" />
+        <div class="row">
+            <div class="col-xs-12 col-xm-12 col-md-6 col-lg-4">
+                <label asp-for="Doors"></label>
+                <input asp-for="Doors" type="text" class="form-control" />
+                <span asp-validation-for="Doors" class="text-danger"></span>
+            </div>
+        </div>
     </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <div class="form-group">
+        <div class="row">
+            <div class="col-xs-12 col-xm-12 col-md-6 col-lg-4">
+                <label asp-for="BodyType"></label>
+                <input asp-for="BodyType" type="text" class="form-control" />
+                <span asp-validation-for="BodyType" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="row">
+            <div class="col-xs-12 col-xm-12 col-md-6 col-lg-4">
+                <label asp-for="Colour"></label>
+                <input asp-for="Colour" type="text" class="form-control" />
+                <span asp-validation-for="Colour" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+                <input id="Submit" type="submit" value="Submit" />
+            </div>
+        </div>
+    </div>
 </form>
-
-<script src="/lib/jquery/dist/jquery.min.js"></script>
-<script src="/lib/jquery-validation/dist/jquery.validate.min.js"></script>
-<script src="/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js"></script>

@@ -8,3 +8,13 @@ D:\Shilpa\CoreAngular_sample\CRUD-Operations-in-ADO.NET-with-ASP.NET-Core-master
 D:\Shilpa\CoreAngular_sample\CRUD-Operations-in-ADO.NET-with-ASP.NET-Core-master\VMS\obj\Debug\netcoreapp2.0\VMS.AssemblyInfo.cs
 D:\Shilpa\CoreAngular_sample\CRUD-Operations-in-ADO.NET-with-ASP.NET-Core-master\VMS\obj\Debug\netcoreapp2.0\VMS.dll
 D:\Shilpa\CoreAngular_sample\CRUD-Operations-in-ADO.NET-with-ASP.NET-Core-master\VMS\obj\Debug\netcoreapp2.0\VMS.pdb
+D:\Shilpa\CoreAngular_sample\VMS\VMS\bin\Debug\netcoreapp2.0\VMS.deps.json
+D:\Shilpa\CoreAngular_sample\VMS\VMS\bin\Debug\netcoreapp2.0\VMS.runtimeconfig.json
+D:\Shilpa\CoreAngular_sample\VMS\VMS\bin\Debug\netcoreapp2.0\VMS.runtimeconfig.dev.json
+D:\Shilpa\CoreAngular_sample\VMS\VMS\bin\Debug\netcoreapp2.0\VMS.dll
+D:\Shilpa\CoreAngular_sample\VMS\VMS\bin\Debug\netcoreapp2.0\VMS.pdb
+D:\Shilpa\CoreAngular_sample\VMS\VMS\obj\Debug\netcoreapp2.0\VMS.csproj.CoreCompileInputs.cache
+D:\Shilpa\CoreAngular_sample\VMS\VMS\obj\Debug\netcoreapp2.0\VMS.AssemblyInfoInputs.cache
+D:\Shilpa\CoreAngular_sample\VMS\VMS\obj\Debug\netcoreapp2.0\VMS.AssemblyInfo.cs
+D:\Shilpa\CoreAngular_sample\VMS\VMS\obj\Debug\netcoreapp2.0\VMS.dll
+D:\Shilpa\CoreAngular_sample\VMS\VMS\obj\Debug\netcoreapp2.0\VMS.pdb

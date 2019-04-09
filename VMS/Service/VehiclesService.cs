@@ -6,28 +6,33 @@ namespace VMS.Service
 {
     public class VehiclesService
     {
-        VehicleRepository VR = new VehicleRepository();
+        VehicleRepository vehicleRepository = new VehicleRepository();
 
-        public List<Vehicles> FetchCars(int Id)
+        public List<Vehicles> FetchVehicle()
         {
             List<Vehicles> car = new List<Vehicles>();
-            car = VR.FetchCars1(Id);
+            car = vehicleRepository.FetchVehicle();
             return car;
         }
 
         public List<Vehicletype> LoadVehicleTypeList()
         {
-            return VR.LoadVehicleTypes();
+            return vehicleRepository.LoadVehicleTypes();
         }
 
         public VehicleMakemodelMapping GetMakeModelIDList(VehicleMakemodelMapping mapping, decimal VmakeId, decimal VmodelId)
         {
-            return VR.GetMakeModelIDs(mapping, VmakeId, VmodelId);
+            return vehicleRepository.GetMakeModelIDs(mapping, VmakeId, VmodelId);
         }
 
         public void InsertIntoVehicleRecordProperties(VehiclesModel vehicles, decimal id)
         {
-            VR.InsertIntoVehicleRecordProperties(vehicles, id);
+            vehicleRepository.InsertIntoVehicleRecordProperties(vehicles, id);
+        }
+
+        public void Delete(decimal recordID)
+        {
+            vehicleRepository.Delete(recordID);
         }
     }
 }

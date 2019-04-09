@@ -1,11 +1,12 @@
-﻿using VMS.Models;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using VMS.Models;
 using VMS.Service;
 
 namespace VMS.Controllers
@@ -13,62 +14,87 @@ namespace VMS.Controllers
     public class HomeController : Controller
     {
         public IConfiguration Configuration { get; }
-        VehiclesService vs = new VehiclesService();
+        ILogger logger;
+        VehiclesService vehicleService = new VehiclesService();
 
         public IActionResult Index()
         {
-            var _modelContext = new VehiclesContext();
             List<Vehicles> carList = new List<Vehicles>();
 
-            carList = vs.FetchCars(1);
+            try
+            {
+                var _modelContext = new VehiclesContext();
 
+                carList = vehicleService.FetchVehicle();
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(" Exception on display of data: " + ex);
+            }
             return View(carList);
         }
 
         public IActionResult Create()
-        {            
-            ViewBag.ListOfVehicles = vs.LoadVehicleTypeList();
+        {
+            try
+            {
+                ViewBag.ListOfVehicles = vehicleService.LoadVehicleTypeList();
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(" Exception on creating new record: " + ex);
+            }
+
             return View();
         }
 
         [HttpPost]
         public IActionResult Create(VehiclesModel vehicles, IFormCollection formCollection)
         {
+            IActionResult returnpath = View(vehicles);
             VehicleMakemodelMapping mapping = new VehicleMakemodelMapping();
             var _modelContext = new VehiclesContext();
 
-            Validation(vehicles);
-
-            decimal VmakeId = Convert.ToDecimal(HttpContext.Request.Form["VmakeId"]);
-            decimal VmodelId = Convert.ToDecimal(HttpContext.Request.Form["VmodelId"]);
-            mapping = vs.GetMakeModelIDList(mapping, VmakeId, VmodelId);
-
-            if (ModelState.IsValid)
+            try
             {
-                if (mapping != null)
+                Validation(vehicles);
+
+                decimal VmakeId = Convert.ToDecimal(HttpContext.Request.Form["VmakeId"]);
+                decimal VmodelId = Convert.ToDecimal(HttpContext.Request.Form["VmodelId"]);
+                mapping = vehicleService.GetMakeModelIDList(mapping, VmakeId, VmodelId);
+
+                if (ModelState.IsValid)
                 {
-                    var record = new VehicleRecords()
+                    if (mapping != null)
                     {
-                        VmmpId = mapping.VmmpId
-                    };
+                        var record = new VehicleRecords()
+                        {
+                            VmmpId = mapping.VmmpId
+                        };
 
-                    _modelContext.VehicleRecords.Add(record);
-                    _modelContext.SaveChanges();
+                        _modelContext.VehicleRecords.Add(record);
+                        _modelContext.SaveChanges();
 
-                    decimal id = record.VrId;
+                        decimal id = record.VrId;
 
-                    if (id != 0)
-                    {
-                        vs.InsertIntoVehicleRecordProperties(vehicles, id);
+                        if (id != 0)
+                        {
+                            vehicleService.InsertIntoVehicleRecordProperties(vehicles, id);
+                        }
                     }
+                    returnpath = RedirectToAction("Index");
                 }
-                return RedirectToAction("Index");
+                else
+                {
+                    ViewBag.ListOfVehicles = vehicleService.LoadVehicleTypeList();
+                    returnpath = View(vehicles);
+                }
             }
-            else
+            catch (Exception ex)
             {
-                ViewBag.ListOfVehicles = vs.LoadVehicleTypeList();
-                return View(vehicles);
+                logger.LogError(" Exception on creating new record: " + ex);
             }
+            return returnpath;
         }
 
         private void Validation(VehiclesModel vehicles)
@@ -105,17 +131,7 @@ namespace VMS.Controllers
             {
                 ModelState.AddModelError("", "Select Colour");
             }
-        }    
-
-        //public List<Vehicletype> LoadVehicleTypeList(VehiclesContext _modelContext)
-        //{
-        //    List<Vehicletype> vehicleType = new List<Vehicletype>();
-
-        //    vehicleType = (from vehicle in _modelContext.Vehicletype where vehicle.IsActive.Equals('Y') select vehicle).ToList();
-        //    vehicleType.Insert(0, new Vehicletype { VtId = 0, VehicletypeName = "Select" });
-
-        //    return vehicleType;            
-        //}
+        }
 
         public JsonResult GetMakeList(int VtId)
         {
@@ -142,23 +158,19 @@ namespace VMS.Controllers
             vehicleModel.Insert(0, new VehicleModel { VmodelId = 0, VehiclemodelName = "Select" });
             return Json(new SelectList(vehicleModel, "VmodelId", "VehiclemodelName"));
         }
-
-        public IActionResult Update(int id)
-        {
-            return View();
-        }
-
+        
         [HttpPost]
-        [ActionName("Update")]
-        public IActionResult Update_Post()
+        public IActionResult Delete(decimal VRId, IFormCollection formCollection)
         {
+            vehicleService.Delete(VRId);
             return RedirectToAction("Index");
         }
 
-        [HttpPost]
-        public IActionResult Delete(int id)
-        {
-            return RedirectToAction("Index");
-        }
+        //[HttpPost]
+        //[ActionName("Update")]
+        //public IActionResult Update(VehiclesModel vehicle)
+        //{
+        //    return RedirectToAction("Index");
+        //}
     }
 }

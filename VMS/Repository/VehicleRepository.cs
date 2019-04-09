@@ -10,10 +10,10 @@ namespace VMS.Repository
     {
         VehiclesContext _modelContext = new VehiclesContext();
 
-        public List<Vehicles> FetchCars1(int id)
+        public List<Vehicles> FetchVehicle()
         {
             List<Vehicles> carList = new List<Vehicles>();
-            
+
             using (var context = new VehiclesContext())
             {
                 string query1 = @"SELECT R.VR_ID VRId, T.VT_ID VtId, MMM.VMMP_ID VMMPId, T.VEHICLETYPE_NAME Type,
@@ -92,7 +92,7 @@ namespace VMS.Repository
         }
 
         public VehicleMakemodelMapping GetMakeModelIDs(VehicleMakemodelMapping mapping, decimal VmakeId, decimal VmodelId)
-        {            
+        {
             mapping = (from mmm in _modelContext.VehicleMakemodelMapping
                        where mmm.VmakeId.Equals(VmakeId)
                        && mmm.VmodelId.Equals(VmodelId)
@@ -157,6 +157,51 @@ namespace VMS.Repository
                     Value = vehicles.Colour
                 };
                 _modelContext.VehicleRecordsProperties.Add(recordProperty);
+                _modelContext.SaveChanges();
+            }
+        }
+
+        public void Delete(decimal recordId)
+        {
+            List<VehicleRecordsProperties> vrProperties = _modelContext.VehicleRecordsProperties
+                    .Where(e => e.VrId == recordId)
+                    .ToList();
+            if (vrProperties != null)
+            {
+                foreach (VehicleRecordsProperties vr in vrProperties)
+                    _modelContext.VehicleRecordsProperties.Remove(vr);
+            }
+            _modelContext.SaveChanges();
+
+            var VRPRecords = _modelContext.VehicleRecordsProperties
+                    .Where(e => e.VrId == recordId)
+                    .ToList();
+            if (VRPRecords.Count == 0)
+            {
+                VehicleRecords deleteVehicleRecord = _modelContext.VehicleRecords.Find(recordId);
+                _modelContext.VehicleRecords.Remove(deleteVehicleRecord);
+                _modelContext.SaveChanges();
+            }
+        }
+
+        public void Update(VehiclesModel vehicle)
+        {
+            var vehicleRecord = _modelContext.VehicleRecordsProperties.Include("VehicleRecords").Where(i => i.VrId == vehicle.VRId).ToList();
+            foreach (var record in vehicleRecord)
+            {
+                if (record.VpmId == 2)
+                    record.Value = vehicle.Engine;
+                if (record.VpmId == 3)
+                    record.Value = vehicle.Doors;
+                if (record.VpmId == 4)
+                    record.Value = vehicle.Wheels;
+                if (record.VpmId == 5)
+                    record.Value = vehicle.BodyType;
+                if (record.VpmId == 6)
+                    record.Value = vehicle.Colour;
+
+                var entry = _modelContext.VehicleRecordsProperties.Update(record);
+                entry.State = EntityState.Modified;
                 _modelContext.SaveChanges();
             }
         }

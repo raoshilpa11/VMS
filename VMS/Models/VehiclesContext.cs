@@ -1,18 +1,18 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace VMS.Models
 {
     public partial class VehiclesContext : DbContext
     {
+        public readonly string connectionString;
         public VehiclesContext()
         {
         }
 
-        public VehiclesContext(DbContextOptions<VehiclesContext> options)
+        public VehiclesContext(DbContextOptions<VehiclesContext> options, string connectionString)
             : base(options)
         {
+            this.connectionString = connectionString;
         }
 
         public virtual DbSet<Vehicles> Vehicles { get; set; }
@@ -33,8 +33,7 @@ namespace VMS.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer("Server=DESKTOP-I2G0T9N;Database=Vehicles;Trusted_Connection=True;");
+                optionsBuilder.UseSqlServer("Server=DESKTOP-I2G0T9N;Database=Vehicles;Trusted_Connection=True;");                
             }
         }
 
@@ -48,13 +47,13 @@ namespace VMS.Models
 
                 entity.Property(e => e.Id)
                     .HasColumnName("ID")
-                    .HasColumnType("numeric(18, 0)")                   
+                    .HasColumnType("numeric(18, 0)")
                     .ValueGeneratedOnAdd();
-                
+
 
                 entity.Property(e => e.Bodytype)
                     .IsRequired()
-                    .HasColumnName("BODYTYPE")                    
+                    .HasColumnName("BODYTYPE")
                     .HasMaxLength(200);
 
                 entity.Property(e => e.Colours)
@@ -134,9 +133,9 @@ namespace VMS.Models
                 entity.Property(e => e.VpId)
                     .HasColumnName("VpId")
                     .HasColumnType("numeric(18, 0)");
-                   
 
-                entity.Property(e => e.PropertyName)                  
+
+                entity.Property(e => e.PropertyName)
                     .HasColumnName("PropertyName")
                     .HasMaxLength(200);
 
@@ -500,7 +499,7 @@ namespace VMS.Models
                 entity.HasOne(d => d.Vr)
                     .WithMany(p => p.VehicleRecordsProperties)
                     .HasForeignKey(d => d.VrId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("FK__VEHICLE_R__VR_ID__114A936A");
             });
 

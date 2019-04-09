@@ -9,7 +9,7 @@
 
 <table class="table table-bordered table-sm table-striped">
     <thead>
-        <tr><th>Vehicle</th><th>Make</th><th>Model</th><th>Engine</th><th>Doors</th><th>Wheels</th><th>BodyType</th><th>Colour</th><th>Update</th><th>Delete</th></tr>
+        <tr><th>Vehicle</th><th>Make</th><th>Model</th><th>Engine</th><th>Doors</th><th>Wheels</th><th>BodyType</th><th>Colour</th>@*<th>Update</th>*@<th>Delete</th></tr>
     </thead>
     <tbody>
         @if (Model == null)
@@ -51,11 +51,9 @@
                             }
                         }
                     }
-                    <td><a asp-action="Update" asp-route-id="@p.VRId">Update</a></td>
+                    @*<td><a asp-action="Update" asp-route-id="@p.VRId">Update</a></td>*@
                     <td>
-                        <form asp-action="Delete" method="post" asp-route-id="@p.VRId">
-                            <button>Delete</button>
-                        </form>
+                        <a asp-action="Delete" asp-route-id="@p.VRId">Delete</a>                        
                     </td>
                 </tr>
             }
