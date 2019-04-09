@@ -1,0 +1,286 @@
+USE [Vehicles]
+GO
+
+INSERT INTO [dbo].[VEHICLETYPE]
+           ([VEHICLETYPE_NAME],[DESCRIPTION],[IS_ACTIVE],[CREATED_BY],[CREATED_DATE])           
+     VALUES
+           ('Car','Car', 'Y','Admin', SYSDATETIME())
+           
+INSERT INTO [dbo].[VEHICLETYPE]
+           ([VEHICLETYPE_NAME],[DESCRIPTION],[IS_ACTIVE],[CREATED_BY],[CREATED_DATE])           
+     VALUES
+           ('Boat','Boat', 'Y','Admin', SYSDATETIME())
+
+INSERT INTO [dbo].[VEHICLETYPE]
+           ([VEHICLETYPE_NAME],[DESCRIPTION],[IS_ACTIVE],[CREATED_BY],[CREATED_DATE])           
+     VALUES
+           ('Caravan','Caravan', 'N','Admin', SYSDATETIME())
+
+INSERT INTO [dbo].[VEHICLETYPE]
+           ([VEHICLETYPE_NAME],[DESCRIPTION],[IS_ACTIVE],[CREATED_BY],[CREATED_DATE])           
+     VALUES
+           ('Bike','Bike', 'N','Admin', SYSDATETIME())
+
+--------------------------
+
+
+USE [Vehicles]
+GO
+
+INSERT INTO [dbo].[VEHICLE_PROPERTIES]
+           ([PROPERTY],[IS_ACTIVE],[CREATED_BY],[CREATED_DATE],[DESCRIPTION])
+     VALUES
+            ( 'ID','Y','Admin', SYSDATETIME(),'ID')
+GO
+
+INSERT INTO [dbo].[VEHICLE_PROPERTIES]
+           ([PROPERTY],[IS_ACTIVE],[CREATED_BY],[CREATED_DATE],[DESCRIPTION])
+     VALUES
+            ('Engine','Y','Admin', SYSDATETIME(),'Engine')
+GO
+
+INSERT INTO [dbo].[VEHICLE_PROPERTIES]
+           ([PROPERTY],[IS_ACTIVE],[CREATED_BY],[CREATED_DATE],[DESCRIPTION])
+     VALUES
+            ('Doors','Y','Admin', SYSDATETIME(),'Doors')
+GO
+INSERT INTO [dbo].[VEHICLE_PROPERTIES]
+           ([PROPERTY],[IS_ACTIVE],[CREATED_BY],[CREATED_DATE],[DESCRIPTION])
+     VALUES
+            ('Wheels','Y','Admin', SYSDATETIME(),'Wheels')
+GO
+INSERT INTO [dbo].[VEHICLE_PROPERTIES]
+           ([PROPERTY],[IS_ACTIVE],[CREATED_BY],[CREATED_DATE],[DESCRIPTION])
+     VALUES
+            ('Body Type','Y','Admin', SYSDATETIME(),'Body Type')
+GO
+INSERT INTO [dbo].[VEHICLE_PROPERTIES]
+           ([PROPERTY],[IS_ACTIVE],[CREATED_BY],[CREATED_DATE],[DESCRIPTION])
+     VALUES
+            ('Colour','Y','Admin', SYSDATETIME(),'Colour')
+GO
+
+-----------------------------
+
+USE [Vehicles]
+GO
+
+
+INSERT INTO [dbo].[VEHICLE_PROPERTIES_MAPPING]
+           ([VT_ID],[VP_ID],[IS_ACTIVE],[CREATED_BY],[CREATED_DATE],[DESCRIPTION])
+     VALUES
+           (1,1,'Y','Admin', SYSDATETIME(),'Car-ID')
+GO
+
+INSERT INTO [dbo].[VEHICLE_PROPERTIES_MAPPING]
+           ([VT_ID],[VP_ID],[IS_ACTIVE],[CREATED_BY],[CREATED_DATE],[DESCRIPTION])
+     VALUES
+           (1,2,'Y','Admin', SYSDATETIME(),'Car-Engine')
+GO
+
+INSERT INTO [dbo].[VEHICLE_PROPERTIES_MAPPING]
+           ([VT_ID],[VP_ID],[IS_ACTIVE],[CREATED_BY],[CREATED_DATE],[DESCRIPTION])
+     VALUES
+           (1,3,'Y','Admin', SYSDATETIME(),'Car-Doors')
+GO
+INSERT INTO [dbo].[VEHICLE_PROPERTIES_MAPPING]
+           ([VT_ID],[VP_ID],[IS_ACTIVE],[CREATED_BY],[CREATED_DATE],[DESCRIPTION])
+     VALUES
+           (1,4,'Y','Admin', SYSDATETIME(),'Car-Wheels')
+GO
+INSERT INTO [dbo].[VEHICLE_PROPERTIES_MAPPING]
+           ([VT_ID],[VP_ID],[IS_ACTIVE],[CREATED_BY],[CREATED_DATE],[DESCRIPTION])
+     VALUES
+           (1,5,'Y','Admin', SYSDATETIME(),'Car-BodyType')
+GO
+INSERT INTO [dbo].[VEHICLE_PROPERTIES_MAPPING]
+           ([VT_ID],[VP_ID],[IS_ACTIVE],[CREATED_BY],[CREATED_DATE],[DESCRIPTION])
+     VALUES
+           (1,6,'Y','Admin', SYSDATETIME(),'Car-Colour')
+GO
+
+INSERT INTO [dbo].[VEHICLE_PROPERTIES_MAPPING]
+           ([VT_ID],[VP_ID],[IS_ACTIVE],[CREATED_BY],[CREATED_DATE],[DESCRIPTION])
+     VALUES
+           (2,1,'Y','Admin', SYSDATETIME(),'Boat-ID')
+GO
+
+INSERT INTO [dbo].[VEHICLE_PROPERTIES_MAPPING]
+           ([VT_ID],[VP_ID],[IS_ACTIVE],[CREATED_BY],[CREATED_DATE],[DESCRIPTION])
+     VALUES
+           (2,2,'Y','Admin', SYSDATETIME(),'Boat-Engine')
+GO
+
+INSERT INTO [dbo].[VEHICLE_PROPERTIES_MAPPING]
+           ([VT_ID],[VP_ID],[IS_ACTIVE],[CREATED_BY],[CREATED_DATE],[DESCRIPTION])
+     VALUES
+           (2,3,'Y','Admin', SYSDATETIME(),'Boat-Doors')
+GO
+
+-----------------------------------------
+
+USE [Vehicles]
+GO
+
+INSERT INTO [dbo].[VEHICLE_MAKE]
+           ([VEHICLEMAKE_NAME],[IS_ACTIVE],[CREATED_BY],[CREATED_DATE],[DESCRIPTION])
+     VALUES
+           ( 'Audi','Y','Admin', SYSDATETIME(),'Audi')
+GO
+
+INSERT INTO [dbo].[VEHICLE_MAKE]
+           ([VEHICLEMAKE_NAME],[IS_ACTIVE],[CREATED_BY],[CREATED_DATE],[DESCRIPTION])
+     VALUES
+           ('BMW','Y','Admin', SYSDATETIME(),'BMW')
+GO
+
+INSERT INTO [dbo].[VEHICLE_MAKE]
+           ([VEHICLEMAKE_NAME],[IS_ACTIVE],[CREATED_BY],[CREATED_DATE],[DESCRIPTION])
+     VALUES
+           ( 'Ford','Y','Admin', SYSDATETIME(),'Ford')
+GO
+
+INSERT INTO [dbo].[VEHICLE_MAKE]
+           ([VEHICLEMAKE_NAME],[IS_ACTIVE],[CREATED_BY],[CREATED_DATE],[DESCRIPTION])
+     VALUES
+           ( 'Hyundai','Y','Admin', SYSDATETIME(),'Hyundai')
+GO
+
+INSERT INTO [dbo].[VEHICLE_MAKE]
+           ([VEHICLEMAKE_NAME],[IS_ACTIVE],[CREATED_BY],[CREATED_DATE],[DESCRIPTION])
+     VALUES
+           ( 'Mazda','Y','Admin', SYSDATETIME(),'Mazda')
+GO
+
+------------------------------------
+
+USE [Vehicles]
+GO
+
+INSERT INTO [dbo].[VEHICLE_MODEL]
+		   ([VEHICLEMODEL_NAME],[IS_ACTIVE],[CREATED_BY],[CREATED_DATE],[DESCRIPTION])
+     VALUES
+           ( 'A1','Y','Admin', SYSDATETIME(),'A1')
+GO
+
+INSERT INTO [dbo].[VEHICLE_MODEL]
+		   ([VEHICLEMODEL_NAME],[IS_ACTIVE],[CREATED_BY],[CREATED_DATE],[DESCRIPTION])
+     VALUES
+           ( 'A2','Y','Admin', SYSDATETIME(),'A2')
+GO
+
+INSERT INTO [dbo].[VEHICLE_MODEL]
+		   ([VEHICLEMODEL_NAME],[IS_ACTIVE],[CREATED_BY],[CREATED_DATE],[DESCRIPTION])
+     VALUES
+           ( '116i','Y','Admin', SYSDATETIME(),'116i')
+GO
+
+INSERT INTO [dbo].[VEHICLE_MODEL]
+		   ([VEHICLEMODEL_NAME],[IS_ACTIVE],[CREATED_BY],[CREATED_DATE],[DESCRIPTION])
+     VALUES
+           ( '118i','Y','Admin', SYSDATETIME(),'118i')
+GO
+
+INSERT INTO [dbo].[VEHICLE_MODEL]
+		   ([VEHICLEMODEL_NAME],[IS_ACTIVE],[CREATED_BY],[CREATED_DATE],[DESCRIPTION])
+     VALUES
+           ( 'Ecosport','Y','Admin', SYSDATETIME(),'Ecosport')
+GO
+
+INSERT INTO [dbo].[VEHICLE_MODEL]
+		   ([VEHICLEMODEL_NAME],[IS_ACTIVE],[CREATED_BY],[CREATED_DATE],[DESCRIPTION])
+     VALUES
+           ( 'Everest','Y','Admin', SYSDATETIME(),'Everest')
+GO
+
+
+---------------------------------
+
+
+USE [Vehicles]
+GO
+
+INSERT INTO [dbo].[VEHICLE_MAKEMODEL_MAPPING]
+           ([VT_ID],[VMAKE_ID],[VMODEL_ID],[IS_ACTIVE],[CREATED_BY],[CREATED_DATE],[DESCRIPTION])
+     VALUES
+           (1,1,1,'Y','Admin', SYSDATETIME(),'Car-Audi-A1')
+GO
+
+INSERT INTO [dbo].[VEHICLE_MAKEMODEL_MAPPING]
+           ([VT_ID],[VMAKE_ID],[VMODEL_ID],[IS_ACTIVE],[CREATED_BY],[CREATED_DATE],[DESCRIPTION])
+     VALUES
+           (1,1,2,'Y','Admin', SYSDATETIME(),'Car-Audi-A2')
+GO
+
+INSERT INTO [dbo].[VEHICLE_MAKEMODEL_MAPPING]
+           ([VT_ID],[VMAKE_ID],[VMODEL_ID],[IS_ACTIVE],[CREATED_BY],[CREATED_DATE],[DESCRIPTION])
+     VALUES
+           (1,2,3,'Y','Admin', SYSDATETIME(),'Car-BMW-116i')
+GO
+
+INSERT INTO [dbo].[VEHICLE_MAKEMODEL_MAPPING]
+           ([VT_ID],[VMAKE_ID],[VMODEL_ID],[IS_ACTIVE],[CREATED_BY],[CREATED_DATE],[DESCRIPTION])
+     VALUES
+           (1,2,4,'Y','Admin', SYSDATETIME(),'Car-BMW-118i')
+GO
+
+INSERT INTO [dbo].[VEHICLE_MAKEMODEL_MAPPING]
+           ([VT_ID],[VMAKE_ID],[VMODEL_ID],[IS_ACTIVE],[CREATED_BY],[CREATED_DATE],[DESCRIPTION])
+     VALUES
+           (1,3,5,'Y','Admin', SYSDATETIME(),'Car-Ford-Ecosport')
+GO
+
+INSERT INTO [dbo].[VEHICLE_MAKEMODEL_MAPPING]
+           ([VT_ID],[VMAKE_ID],[VMODEL_ID],[IS_ACTIVE],[CREATED_BY],[CREATED_DATE],[DESCRIPTION])
+     VALUES
+           (1,3,6,'Y','Admin', SYSDATETIME(),'Car-Ford-Everest')
+GO
+------------------------------
+
+
+INSERT INTO [dbo].[VEHICLE_RECORDS]
+           ([VMMP_ID],[IS_ACTIVE],[CREATED_BY],[CREATED_DATE],[DESCRIPTION])
+     VALUES
+           (1,'Y','Shilpa', SYSDATETIME(),'Insert record')
+GO
+
+------------------------------
+
+USE [Vehicles]
+GO
+
+INSERT INTO [dbo].[VEHICLE_RECORDS_PROPERTIES]
+           ([VR_ID],[VPM_ID],[VALUE],[IS_ACTIVE],[CREATED_BY],[CREATED_DATE],[DESCRIPTION])
+     VALUES
+           (1, 1,'Y','Shilpa', SYSDATETIME(),'Insert record for ID')
+GO
+
+INSERT INTO [dbo].[VEHICLE_RECORDS_PROPERTIES]
+            ([VR_ID],[VPM_ID],[VALUE],[IS_ACTIVE],[CREATED_BY],[CREATED_DATE],[DESCRIPTION])
+     VALUES
+           (1, 2, '3 cylinder','Y','Shilpa', SYSDATETIME(),'Insert record for Engine')
+GO
+
+INSERT INTO [dbo].[VEHICLE_RECORDS_PROPERTIES]
+            ([VR_ID],[VPM_ID],[VALUE],[IS_ACTIVE],[CREATED_BY],[CREATED_DATE],[DESCRIPTION])
+     VALUES
+           (1, 3, '4','Y','Shilpa', SYSDATETIME(),'Insert record for Doors')
+GO
+
+
+
+INSERT INTO [dbo].[VEHICLE_RECORDS_PROPERTIES]
+            ([VR_ID],[VPM_ID],[VALUE],[IS_ACTIVE],[CREATED_BY],[CREATED_DATE],[DESCRIPTION])
+     VALUES
+           (1, 4, '4','Y','Shilpa', SYSDATETIME(),'Insert record for Wheels')
+GO
+INSERT INTO [dbo].[VEHICLE_RECORDS_PROPERTIES]
+            ([VR_ID],[VPM_ID],[VALUE],[IS_ACTIVE],[CREATED_BY],[CREATED_DATE],[DESCRIPTION])
+     VALUES
+           (1, 5, '4 doors 4 seat SUV','Y','Shilpa', SYSDATETIME(),'Insert record for BodyType')
+GO
+INSERT INTO [dbo].[VEHICLE_RECORDS_PROPERTIES]
+            ([VR_ID],[VPM_ID],[VALUE],[IS_ACTIVE],[CREATED_BY],[CREATED_DATE],[DESCRIPTION])
+     VALUES
+           (1, 6, 'Black','Y','Shilpa', SYSDATETIME(),'Insert record for Colour')
+GO

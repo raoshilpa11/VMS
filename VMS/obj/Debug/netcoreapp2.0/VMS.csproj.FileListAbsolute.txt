@@ -18,3 +18,4 @@ D:\Shilpa\CoreAngular_sample\VMS\VMS\obj\Debug\netcoreapp2.0\VMS.AssemblyInfoInp
 D:\Shilpa\CoreAngular_sample\VMS\VMS\obj\Debug\netcoreapp2.0\VMS.AssemblyInfo.cs
 D:\Shilpa\CoreAngular_sample\VMS\VMS\obj\Debug\netcoreapp2.0\VMS.dll
 D:\Shilpa\CoreAngular_sample\VMS\VMS\obj\Debug\netcoreapp2.0\VMS.pdb
+D:\Shilpa\CoreAngular_sample\VMS\VMS\obj\Debug\netcoreapp2.0\VMS.csprojAssemblyReference.cache
