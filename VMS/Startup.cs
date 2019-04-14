@@ -1,20 +1,30 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using VMS.Models;
+using VMS.Repository;
+using VMS.Service;
 
 namespace VMS
 {
     public class Startup
     {
-        public void ConfigureServices(IServiceCollection services)
+        public Startup(IConfiguration configuration)
         {
-            //services.AddDbContext<VehiclesContext>(options =>
-            //options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            Configuration = configuration;
+        }
+        public IConfiguration Configuration { get; }
 
+        public void ConfigureServices(IServiceCollection services)
+        {            
+            services.AddScoped<IVehiclesService, VehiclesService>();
+            services.AddScoped<IVehicleRepository, VehicleRepository>();
+            
+            services.AddDbContext<VehiclesContext>(options => options.UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"]));
 
-            //services.AddScoped<IVehiclesService, VehiclesService>();
-            //services.AddScoped<IVehicleRepository, VehicleRepository>();
-
+            services.AddLogging();
             services.AddMvc();
         }
 

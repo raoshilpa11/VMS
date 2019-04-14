@@ -1,0 +1,138 @@
+SELECT RP.VRP_ID VId, T.VT_ID VtId, MMM.VMMP_ID Id, T.VEHICLETYPE_NAME Type, MAKE.VEHICLEMAKE_NAME Make,
+				MAKE.VMAKE_ID, MODELS.VEHICLEMODEL_NAME Model, MODELS.VMODEL_ID, RP.VPM_ID VPM, RP.VALUE
+                FROM VEHICLE_MAKEMODEL_MAPPING MMM, VEHICLETYPE T, 
+                VEHICLE_MAKE MAKE, VEHICLE_MODEL MODELS, VEHICLE_RECORDS R, VEHICLE_RECORDS_PROPERTIES RP  
+                WHERE R.VMMP_ID = MMM.VMMP_ID
+                AND MMM.VT_ID = T.VT_ID
+                AND MMM.VMAKE_ID = MAKE.VMAKE_ID
+                AND MMM.VMODEL_ID = MODELS.VMODEL_ID
+                AND R.VR_ID = RP.VR_ID
+                --AND R.VR_ID = 1
+                AND MMM.VT_ID = 1;
+
+------------------
+
+
+SELECT R.VR_ID VRId, T.VT_ID VtId, MMM.VMMP_ID Id, T.VEHICLETYPE_NAME Type--, --MAKE.VEHICLEMAKE_NAME Make,
+				--MAKE.VMAKE_ID, MODELS.VEHICLEMODEL_NAME Model, MODELS.VMODEL_ID, 
+				--RP.VPM_ID VPM, RP.VALUE
+                FROM VEHICLE_RECORDS R --LEFT JOIN VEHICLE_RECORDS_PROPERTIES RP  
+				--ON R.VR_ID = RP.VR_ID
+				LEFT JOIN VEHICLE_MAKEMODEL_MAPPING MMM
+				ON R.VMMP_ID = MMM.VMMP_ID
+				LEFT JOIN VEHICLETYPE T
+				ON MMM.VT_ID = T.VT_ID
+    --            LEFT OUTER JOIN VEHICLE_MAKE MAKE
+				--ON MMM.VMAKE_ID = MAKE.VMAKE_ID 
+				--LEFT OUTER JOIN VEHICLE_MODEL MODELS
+				--ON MMM.VMODEL_ID = MODELS.VMODEL_ID
+                WHERE                 
+                --AND R.VR_ID = 1
+                MMM.VT_ID = 1;
+
+select * from VEHICLE_RECORDS;
+
+
+
+SELECT R.VR_ID VRId, T.VT_ID VtId, MMM.VMMP_ID VMMPId, T.VEHICLETYPE_NAME Type
+                FROM VEHICLE_RECORDS R
+				LEFT JOIN VEHICLE_MAKEMODEL_MAPPING MMM
+				ON R.VMMP_ID = MMM.VMMP_ID
+				LEFT JOIN VEHICLETYPE T
+				ON MMM.VT_ID = T.VT_ID
+                WHERE                 
+                --AND R.VR_ID = 1
+                MMM.VT_ID = 1;
+
+SELECT MAKE.VEHICLEMAKE_NAME Make,
+MAKE.VMAKE_ID, MODELS.VEHICLEMODEL_NAME Model, MODELS.VMODEL_ID, 
+VRP.VPM_ID VPM, VRP.VALUE
+FROM VEHICLE_RECORDS R FULL OUTER JOIN VEHICLE_RECORDS_PROPERTIES VRP
+ON R.VR_ID = VRP.VR_ID
+LEFT JOIN VEHICLE_MAKEMODEL_MAPPING VMM
+ON R.VMMP_ID = VMM.VMMP_ID
+LEFT JOIN VEHICLETYPE T
+				ON VMM.VT_ID = T.VT_ID
+LEFT OUTER JOIN VEHICLE_MAKE MAKE
+ON VMM.VMAKE_ID = MAKE.VMAKE_ID 
+LEFT OUTER JOIN VEHICLE_MODEL MODELS
+ON VMM.VMODEL_ID = MODELS.VMODEL_ID
+WHERE R.VR_ID = 1
+
+
+---------------
+
+SELECT R.VR_ID VRId, VRP.VPM_ID VPM, VRP.VALUE
+                    FROM VEHICLE_RECORDS R FULL OUTER JOIN VEHICLE_RECORDS_PROPERTIES VRP
+                    ON R.VR_ID = VRP.VR_ID
+                    LEFT JOIN VEHICLE_MAKEMODEL_MAPPING VMM
+                    ON R.VMMP_ID = VMM.VMMP_ID
+                    LEFT JOIN VEHICLETYPE T
+				    ON VMM.VT_ID = T.VT_ID                    
+                    WHERE R.VR_ID = 1
+
+					------------
+
+					SELECT VRP.VPM_ID VPM, VRP.VALUE
+                    FROM VEHICLE_RECORDS R FULL OUTER JOIN VEHICLE_RECORDS_PROPERTIES VRP
+                    ON R.VR_ID = VRP.VR_ID
+                    LEFT JOIN VEHICLE_MAKEMODEL_MAPPING VMM
+                    ON R.VMMP_ID = VMM.VMMP_ID
+                    LEFT JOIN VEHICLETYPE T
+				    ON VMM.VT_ID = T.VT_ID                    
+                    WHERE R.VR_ID = 2
+
+					select * from VEHICLE_RECORDS
+
+SELECT R.VR_ID VRId, T.VT_ID VtId, MMM.VMMP_ID VMMPId, T.VEHICLETYPE_NAME Type,
+                            MAKE.VEHICLEMAKE_NAME Make,
+                            MAKE.VMAKE_ID VmakeId, MODELS.VEHICLEMODEL_NAME Model, MODELS.VMODEL_ID VmodelId
+                            FROM VEHICLE_RECORDS R
+				            LEFT JOIN VEHICLE_MAKEMODEL_MAPPING MMM
+				            ON R.VMMP_ID = MMM.VMMP_ID
+				            LEFT JOIN VEHICLETYPE T
+				            ON MMM.VT_ID = T.VT_ID
+				            LEFT OUTER JOIN VEHICLE_MAKE MAKE
+                            ON MMM.VMAKE_ID = MAKE.VMAKE_ID 
+                            LEFT OUTER JOIN VEHICLE_MODEL MODELS
+                            ON MMM.VMODEL_ID = MODELS.VMODEL_ID
+                            WHERE                 
+                            --AND R.VR_ID = 1
+                            MMM.VT_ID = 1					
+
+
+
+SELECT R.VR_ID VRId, T.VT_ID VtId, MMM.VMMP_ID VMMPId, T.VEHICLETYPE_NAME Type,
+MAKE.VEHICLEMAKE_NAME Make,
+MAKE.VMAKE_ID VmakeId, MODELS.VEHICLEMODEL_NAME Model, MODELS.VMODEL_ID VmodelId
+                FROM VEHICLE_RECORDS R
+				LEFT JOIN VEHICLE_MAKEMODEL_MAPPING MMM
+				ON R.VMMP_ID = MMM.VMMP_ID
+				LEFT JOIN VEHICLETYPE T
+				ON MMM.VT_ID = T.VT_ID
+				LEFT OUTER JOIN VEHICLE_MAKE MAKE
+                    ON MMM.VMAKE_ID = MAKE.VMAKE_ID 
+                    LEFT OUTER JOIN VEHICLE_MODEL MODELS
+                    ON MMM.VMODEL_ID = MODELS.VMODEL_ID
+                WHERE                 
+                --AND R.VR_ID = 1
+                MMM.VT_ID = 1
+===============
+
+SELECT R.VR_ID VRId, T.VT_ID VtId, MMM.VMMP_ID VMMPId, T.VEHICLETYPE_NAME Type,
+                            MAKE.VEHICLEMAKE_NAME Make,
+                            MAKE.VMAKE_ID VmakeId, MODELS.VEHICLEMODEL_NAME Model, MODELS.VMODEL_ID VmodelId
+                            FROM VEHICLE_RECORDS R
+				            LEFT JOIN VEHICLE_MAKEMODEL_MAPPING MMM
+				            ON R.VMMP_ID = MMM.VMMP_ID
+				            LEFT JOIN VEHICLETYPE T
+				            ON MMM.VT_ID = T.VT_ID
+				            LEFT OUTER JOIN VEHICLE_MAKE MAKE
+                            ON MMM.VMAKE_ID = MAKE.VMAKE_ID 
+                            LEFT OUTER JOIN VEHICLE_MODEL MODELS
+                            ON MMM.VMODEL_ID = MODELS.VMODEL_ID
+                            WHERE                 
+                            --AND R.VR_ID = 1
+                            MMM.VT_ID = 1
+
+select * from vehicle_records

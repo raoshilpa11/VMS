@@ -6,16 +6,22 @@ using VMS.Models;
 
 namespace VMS.Repository
 {
-    public class VehicleRepository
+    public class VehicleRepository : IVehicleRepository
     {
-        VehiclesContext _modelContext = new VehiclesContext();
+        //VehiclesContext _modelContext = new VehiclesContext();
+
+        private VehiclesContext _modelContext;
+        public VehicleRepository(VehiclesContext sc)
+        {
+            _modelContext = sc;
+        }
 
         public List<Vehicles> FetchVehicle()
         {
             List<Vehicles> carList = new List<Vehicles>();
 
-            using (var context = new VehiclesContext())
-            {
+            //using (var context = new VehiclesContext())
+            //{
                 string query1 = @"SELECT R.VR_ID VRId, T.VT_ID VtId, MMM.VMMP_ID VMMPId, T.VEHICLETYPE_NAME Type,
                             MAKE.VEHICLEMAKE_NAME Make,
                             MAKE.VMAKE_ID VmakeId, MODELS.VEHICLEMODEL_NAME Model, MODELS.VMODEL_ID VmodelId
@@ -32,7 +38,7 @@ namespace VMS.Repository
                             --AND R.VR_ID = 1
                             MMM.VT_ID = 1";
 
-                var results = context.Vehicles.FromSql(query1).ToList();
+                var results = _modelContext.Vehicles.FromSql(query1).ToList();
 
                 foreach (var result in results)
                 {
@@ -47,9 +53,9 @@ namespace VMS.Repository
 
                     carList.Add(car);
                 }
-            }
-            using (var modelContext = new VehiclesContext())
-            {
+            //}
+            //using (var modelContext = new VehiclesContext())
+            //{
                 foreach (var result in carList)
                 {
                     string query2 = @"SELECT VRP.VPM_ID VPM, VRP.VALUE
@@ -63,7 +69,7 @@ namespace VMS.Repository
 
                     SqlParameter parameterS = new SqlParameter("@s", result.VRId);
 
-                    var carProperties = modelContext.Cars.FromSql(query2, parameterS).ToList();
+                    var carProperties = _modelContext.Cars.FromSql(query2, parameterS).ToList();
 
                     List<Car> carPropertyList = new List<Car>();
                     if (carProperties != null)
@@ -77,11 +83,11 @@ namespace VMS.Repository
                         }
                     result.Car = carPropertyList;
                 }
-            }
+            //}
             return carList;
         }
 
-        public List<Vehicletype> LoadVehicleTypes()
+        public List<Vehicletype> LoadVehicleTypeList()
         {
             List<Vehicletype> vehicleType = new List<Vehicletype>();
 
@@ -91,7 +97,7 @@ namespace VMS.Repository
             return vehicleType;
         }
 
-        public VehicleMakemodelMapping GetMakeModelIDs(VehicleMakemodelMapping mapping, decimal VmakeId, decimal VmodelId)
+        public VehicleMakemodelMapping GetMakeModelIDList(VehicleMakemodelMapping mapping, decimal VmakeId, decimal VmodelId)
         {
             mapping = (from mmm in _modelContext.VehicleMakemodelMapping
                        where mmm.VmakeId.Equals(VmakeId)

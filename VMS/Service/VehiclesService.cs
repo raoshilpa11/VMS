@@ -4,35 +4,41 @@ using VMS.Repository;
 
 namespace VMS.Service
 {
-    public class VehiclesService
+    public class VehiclesService : IVehiclesService
     {
-        VehicleRepository vehicleRepository = new VehicleRepository();
+        //VehicleRepository vehicleRepository = new VehicleRepository();
+        private readonly IVehicleRepository _vehicleRepository;
+
+        public VehiclesService(IVehicleRepository vehicleRepository)
+        {
+            _vehicleRepository = vehicleRepository;
+        }
 
         public List<Vehicles> FetchVehicle()
         {
             List<Vehicles> car = new List<Vehicles>();
-            car = vehicleRepository.FetchVehicle();
+            car = _vehicleRepository.FetchVehicle();
             return car;
         }
 
         public List<Vehicletype> LoadVehicleTypeList()
         {
-            return vehicleRepository.LoadVehicleTypes();
+            return _vehicleRepository.LoadVehicleTypeList();
         }
 
         public VehicleMakemodelMapping GetMakeModelIDList(VehicleMakemodelMapping mapping, decimal VmakeId, decimal VmodelId)
         {
-            return vehicleRepository.GetMakeModelIDs(mapping, VmakeId, VmodelId);
+            return _vehicleRepository.GetMakeModelIDList(mapping, VmakeId, VmodelId);
         }
 
         public void InsertIntoVehicleRecordProperties(VehiclesModel vehicles, decimal id)
         {
-            vehicleRepository.InsertIntoVehicleRecordProperties(vehicles, id);
+            _vehicleRepository.InsertIntoVehicleRecordProperties(vehicles, id);
         }
 
         public void Delete(decimal recordID)
         {
-            vehicleRepository.Delete(recordID);
+            _vehicleRepository.Delete(recordID);
         }
     }
 }

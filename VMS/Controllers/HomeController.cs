@@ -12,24 +12,31 @@ using VMS.Service;
 namespace VMS.Controllers
 {
     public class HomeController : Controller
-    {
-        public IConfiguration Configuration { get; }
-        ILogger logger;
-        VehiclesService vehicleService = new VehiclesService();
-
+    {        
+        ILogger _logger;
+        
+        private VehiclesContext _modelContext;
+       
+        private readonly IVehiclesService _vehicleService;
+        public HomeController(IVehiclesService vehicleService, VehiclesContext modelContext, ILogger<HomeController> logger)
+        {
+            _vehicleService = vehicleService;
+            _modelContext = modelContext;
+            _logger = logger;
+        }
         public IActionResult Index()
         {
             List<Vehicles> carList = new List<Vehicles>();
 
             try
             {
-                var _modelContext = new VehiclesContext();
+                //var _modelContext = new VehiclesContext();
 
-                carList = vehicleService.FetchVehicle();
+                carList = _vehicleService.FetchVehicle();
             }
             catch (Exception ex)
             {
-                logger.LogError(" Exception on display of data: " + ex);
+                _logger.LogError(" Exception on display of data: " + ex);
             }
             return View(carList);
         }
@@ -38,11 +45,11 @@ namespace VMS.Controllers
         {
             try
             {
-                ViewBag.ListOfVehicles = vehicleService.LoadVehicleTypeList();
+                ViewBag.ListOfVehicles = _vehicleService.LoadVehicleTypeList();
             }
             catch (Exception ex)
             {
-                logger.LogError(" Exception on creating new record: " + ex);
+                _logger.LogError(" Exception on creating new record: " + ex);
             }
 
             return View();
@@ -53,7 +60,7 @@ namespace VMS.Controllers
         {
             IActionResult returnpath = View(vehicles);
             VehicleMakemodelMapping mapping = new VehicleMakemodelMapping();
-            var _modelContext = new VehiclesContext();
+            //var _modelContext = new VehiclesContext();
 
             try
             {
@@ -61,7 +68,7 @@ namespace VMS.Controllers
 
                 decimal VmakeId = Convert.ToDecimal(HttpContext.Request.Form["VmakeId"]);
                 decimal VmodelId = Convert.ToDecimal(HttpContext.Request.Form["VmodelId"]);
-                mapping = vehicleService.GetMakeModelIDList(mapping, VmakeId, VmodelId);
+                mapping = _vehicleService.GetMakeModelIDList(mapping, VmakeId, VmodelId);
 
                 if (ModelState.IsValid)
                 {
@@ -79,20 +86,20 @@ namespace VMS.Controllers
 
                         if (id != 0)
                         {
-                            vehicleService.InsertIntoVehicleRecordProperties(vehicles, id);
+                            _vehicleService.InsertIntoVehicleRecordProperties(vehicles, id);
                         }
                     }
                     returnpath = RedirectToAction("Index");
                 }
                 else
                 {
-                    ViewBag.ListOfVehicles = vehicleService.LoadVehicleTypeList();
+                    ViewBag.ListOfVehicles = _vehicleService.LoadVehicleTypeList();
                     returnpath = View(vehicles);
                 }
             }
             catch (Exception ex)
             {
-                logger.LogError(" Exception on creating new record: " + ex);
+                _logger.LogError(" Exception on creating new record: " + ex);
             }
             return returnpath;
         }
@@ -135,7 +142,7 @@ namespace VMS.Controllers
 
         public JsonResult GetMakeList(int VtId)
         {
-            var _modelContext = new VehiclesContext();
+            //var _modelContext = new VehiclesContext();
             List<VehicleMake> vehicleMake = new List<VehicleMake>();
 
             vehicleMake = (from make in _modelContext.VehicleMake
@@ -148,7 +155,7 @@ namespace VMS.Controllers
 
         public JsonResult GetModelList(int VmakeId)
         {
-            var _modelContext = new VehiclesContext();
+            //var _modelContext = new VehiclesContext();
             List<VehicleModel> vehicleModel = new List<VehicleModel>();
 
             vehicleModel = (from model in _modelContext.VehicleModel
@@ -162,7 +169,7 @@ namespace VMS.Controllers
         [HttpPost]
         public IActionResult Delete(decimal VRId, IFormCollection formCollection)
         {
-            vehicleService.Delete(VRId);
+            _vehicleService.Delete(VRId);
             return RedirectToAction("Index");
         }
 

@@ -9,11 +9,21 @@ namespace VMS.Models
         {
         }
 
-        public VehiclesContext(DbContextOptions<VehiclesContext> options, string connectionString)
-            : base(options)
-        {
-            this.connectionString = connectionString;
-        }
+        //public VehiclesContext(DbContextOptions<VehiclesContext> options, string connectionString)
+        //    : base(options)
+        //{
+        //    this.connectionString = connectionString;
+        //}
+
+        public VehiclesContext(DbContextOptions<VehiclesContext> options) : base(options) { }
+        
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //}
+        //protected override void OnModelCreating(ModelBuilder modelBuilder)
+        //{
+        //}
+
 
         public virtual DbSet<Vehicles> Vehicles { get; set; }
         public virtual DbSet<Car> Car { get; set; }

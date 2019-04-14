@@ -1,0 +1,3 @@
++_RECORDS
+
+select * from VEHICLE_RECORDS_PROPERTIES where VR_ID= 11
